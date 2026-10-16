@@ -1,0 +1,436 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+:root {
+  color-scheme: dark;
+
+  --bg: #071a35;
+  --panel: #ffffff;
+
+  --ink: #0c2340;
+  --muted: #52606d;
+
+  --accent: #005baa;
+  --accent-dark: #003f7a;
+
+  --senati-red: #e30613;
+
+  --line: rgba(12, 35, 64, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #002c9e;
+  color: var(--ink);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.mobile-shell {
+  display: grid;
+  min-height: 100svh;
+  padding: max(18px, env(safe-area-inset-top)) 18px max(18px, env(safe-area-inset-bottom));
+  place-items: center;
+}
+
+.panel {
+  width: min(100%, 430px);
+  min-height: min(700px, calc(100svh - 36px));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 28px;
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 24px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 52px;
+  margin-bottom: 20px;
+  flex-wrap: nowrap;
+  padding-left: 8px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.brand-mark {
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+  border-radius: 50%;
+
+  box-shadow:
+    18px 0 var(--senati-red),
+    36px 0 #ffffff;
+}
+
+.step {
+  display: none;
+}
+
+.step.is-active {
+  display: block;
+}
+
+h1 {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(2rem, 12vw, 3.3rem);
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+
+p {
+  margin: 18px 0 26px;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.55;
+  text-align: center;
+}
+
+input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.primary-action,
+.secondary-action {
+  width: 100%;
+  min-height: 54px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 800;
+  text-align: center;
+  text-decoration: none;
+}
+
+.primary-action {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      ellipse at top,
+      rgba(255, 255, 255, 0.6),
+      transparent 55%
+    ),
+    #002c9e;
+  color: #fff;
+  border: 3px solid #a8c4f0;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 0 0 1px #002c9e;
+  transition: .25s;
+}
+
+.primary-action::after {
+  content: "";
+  position: absolute;
+  right: -4px;
+  bottom: -4px;
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(
+    -45deg,
+    transparent 0%,
+    transparent 38%,
+    #1ee5e0 38%,
+    #1ee5e0 44%,
+    transparent 44%,
+    transparent 52%,
+    #1ee5e0 52%,
+    #1ee5e0 58%,
+    transparent 58%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.primary-action:hover {
+  transform: translateY(-2px);
+}
+
+.primary-action:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.secondary-action {
+  background:
+    linear-gradient(
+      to bottom,
+      #ffffff 0%,
+      #dde3ea 45%,
+      #b7c0cc 50%,
+      #e9edf2 100%
+    );
+  color: #002c9e;
+  border: 1px solid #a3adba;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cropper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 900 / 1071;
+  overflow: hidden;
+  margin-top: 22px;
+  background: #191919;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  touch-action: none;
+}
+.mural-mask {
+  --mural-crop: 8%;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: var(--mural-crop);
+  background: rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+}
+
+.mural-mask-top {
+  top: 0;
+}
+
+.mural-mask-bottom {
+  bottom: 0;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.controls {
+  margin: 18px 0;
+}
+
+.controls label {
+  display: grid;
+  gap: 10px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 10px;
+}
+
+.success {
+  text-align: center;
+}
+
+.success-icon {
+  width: 78px;
+  height: 78px;
+  display: inline-grid;
+  margin-bottom: 22px;
+  place-items: center;
+  background:
+    radial-gradient(
+      ellipse at bottom,
+      rgba(255, 255, 255, 0.6),
+      transparent 55%
+    ),
+    #002c9e;
+  color: #fff;
+  border: 3px solid #a8c4f0;
+  border-radius: 50%;
+  font-size: 2.6rem;
+  font-weight: 900;
+  box-shadow: 0 0 0 1px #002c9e;
+}
+
+.status {
+  min-height: 24px;
+  margin: 18px 0 0;
+  color: var(--accent-dark);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+#downloadButton {
+  background: #ffffff;
+  color: #005baa;
+  border: 2px solid #005baa;
+  font-weight: 800;
+}
+
+.hero-logo {
+  display: block;
+  margin: 0 auto 20px;
+  width: 100%;
+  max-width: 264px;
+  height: auto;
+}
+
+.hero-title {
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.6rem, 8vw, 2.4rem);
+  color: #002c9e;
+  line-height: 1.25;
+  letter-spacing: 0.5px;
+  margin: 0 0 20px;
+}
+
+#cropStep h1 {
+  text-align: center;
+  text-transform: uppercase;
+  color: #002c9e;
+}
+
+#cropStep p {
+  text-align: center;
+  font-weight: 700;
+}
+
+/* Versión compacta solo para el paso de recorte */
+#cropStep .hero-logo {
+  max-width: 140px;
+  margin: 0 auto 8px;
+}
+
+#cropStep h1 {
+  font-size: 1.4rem;
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+
+#cropStep p {
+  font-size: 0.85rem;
+  margin: 6px 0 12px;
+}
+
+#cropStep .cropper {
+  width: auto;
+  max-width: 100%;
+  height: min(36vh, 340px);
+  margin: 10px auto;
+}
+
+#cropStep .controls {
+  margin: 10px 0;
+}
+
+#cropStep .controls label {
+  gap: 4px;
+  font-size: 0.8rem;
+}
+
+#cropStep input[type="range"] {
+  height: 20px;
+}
+
+#cropStep .title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+#cropStep .circuit {
+  width: 90px;
+  height: auto;
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+#cropStep .circuit-left {
+  margin-left: -28px;
+}
+
+#cropStep .circuit-right {
+  margin-right: -28px;
+}
+
+#successStep h1 {
+  color: #002c9e;
+  text-transform: uppercase;
+  font-size: 1.7rem;
+}
+
+#successStep .icon-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+#successStep .circuit {
+  width: 100px;
+  height: auto;
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+#successStep .circuit-left {
+  margin-left: -28px;
+}
+
+#successStep .circuit-right {
+  margin-right: -28px;
+}
+
+#captureStep.is-active {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+#captureStep .circuit-bottom {
+  display: block;
+  width: calc(100% + 56px);
+  max-width: none;
+  margin-left: -28px;
+  margin-right: -28px;
+  margin-bottom: -28px;
+  margin-top: auto;
+}
+
+#statusMessage:empty {
+  margin: 0;
+  min-height: 0;
+}
